@@ -2,4 +2,6 @@
 <resources>
     <string name="hello">Hello contacts!</string>
     <string name="app_name">contacts</string>
+    <string name="loading_contacts">Carregando contatos</string>
+    <string name="no_contacts_found">Nenhum contato encontrado</string>
 </resources>
