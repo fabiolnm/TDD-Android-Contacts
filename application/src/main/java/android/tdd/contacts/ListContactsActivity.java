@@ -1,6 +1,7 @@
 package android.tdd.contacts;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -19,6 +20,8 @@ public class ListContactsActivity extends Activity {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate");
         setContentView(R.layout.main);
+        
+        ProgressDialog.show(this, null, null);
     }
 
 }
