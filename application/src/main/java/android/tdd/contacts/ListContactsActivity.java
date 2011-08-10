@@ -21,7 +21,7 @@ public class ListContactsActivity extends Activity {
         Log.i(TAG, "onCreate");
         setContentView(R.layout.main);
         
-        ProgressDialog.show(this, null, null);
+        ProgressDialog.show(this, null, getString(R.string.loading_contacts));
     }
 
 }
