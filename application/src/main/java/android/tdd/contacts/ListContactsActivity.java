@@ -1,7 +1,10 @@
 package android.tdd.contacts;
 
+import org.springframework.web.client.RestTemplate;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -22,7 +25,18 @@ public class ListContactsActivity extends Activity {
         setContentView(R.layout.main);
         
         ProgressDialog.show(this, null, getString(R.string.loading_contacts));
+        
+        loadContacts();
     }
 
+	private void loadContacts() {
+		new AsyncTask<Void, Void, Void>() {
+			@Override
+			protected Void doInBackground(Void... arg0) {
+				String contactsUrl = "http://m.concretesolutions.com.br/extranet/contacts";
+				return new RestTemplate().getForObject(contactsUrl, Void.class);
+			}
+		}.execute();
+	}
 }
 
