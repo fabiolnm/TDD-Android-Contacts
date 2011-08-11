@@ -1,5 +1,7 @@
 package android.tdd.contacts;
 
+import java.util.ArrayList;
+
 import org.springframework.web.client.RestTemplate;
 
 import android.app.Activity;
@@ -30,11 +32,11 @@ public class ListContactsActivity extends Activity {
     }
 
 	private void loadContacts() {
-		new AsyncTask<Void, Void, Void>() {
+		new AsyncTask<Void, Void, ArrayList>() {
 			@Override
-			protected Void doInBackground(Void... arg0) {
-				String contactsUrl = "http://m.concretesolutions.com.br/extranet/contacts";
-				return new RestTemplate().getForObject(contactsUrl, Void.class);
+			protected ArrayList doInBackground(Void... arg0) {
+				String contactsUrl = "http://m.concretesolutions.com.br/extranet/contact/list";
+				return new RestTemplate().getForObject(contactsUrl, ArrayList.class);
 			}
 		}.execute();
 	}
