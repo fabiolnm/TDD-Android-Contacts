@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 public class ListContactsActivity extends Activity {
 
@@ -37,6 +38,11 @@ public class ListContactsActivity extends Activity {
 			protected ArrayList doInBackground(Void... arg0) {
 				String contactsUrl = "http://m.concretesolutions.com.br/extranet/contact/list";
 				return new RestTemplate().getForObject(contactsUrl, ArrayList.class);
+			}
+			
+			@Override
+			protected void onPostExecute(ArrayList result) {
+				findViewById(R.id.no_contacts_found).setVisibility(View.VISIBLE);
 			}
 		}.execute();
 	}
