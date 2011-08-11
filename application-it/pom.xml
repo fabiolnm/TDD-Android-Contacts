@@ -56,6 +56,21 @@
 
   <build>
     <plugins>
+		<plugin>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>exec-maven-plugin</artifactId>
+			<version>1.2</version>
+			<configuration>
+				<executable>maven-exec-commands.sh</executable>
+			</configuration>
+			<executions>
+				<execution>
+					<goals>
+						<goal>exec</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
       <plugin>
         <groupId>com.jayway.maven.plugins.android.generation2</groupId>
         <artifactId>maven-android-plugin</artifactId>
