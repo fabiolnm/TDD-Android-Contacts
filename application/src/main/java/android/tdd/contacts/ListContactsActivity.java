@@ -14,6 +14,7 @@ import android.view.View;
 public class ListContactsActivity extends Activity {
 
     private static String TAG = "contacts";
+	private ProgressDialog progressDialog;
 
     /**
      * Called when the activity is first created.
@@ -27,10 +28,17 @@ public class ListContactsActivity extends Activity {
         Log.i(TAG, "onCreate");
         setContentView(R.layout.main);
         
-        ProgressDialog.show(this, null, getString(R.string.loading_contacts));
+        progressDialog = ProgressDialog.show(this, null, getString(R.string.loading_contacts));
         
         loadContacts();
     }
+    
+	@Override
+	protected void onPause() {
+		super.onPause();
+		if (progressDialog.isShowing())
+			progressDialog.dismiss();
+	}
 
 	private void loadContacts() {
 		new AsyncTask<Void, Void, ArrayList>() {
@@ -42,6 +50,7 @@ public class ListContactsActivity extends Activity {
 			
 			@Override
 			protected void onPostExecute(ArrayList result) {
+				progressDialog.dismiss();
 				findViewById(R.id.no_contacts_found).setVisibility(View.VISIBLE);
 			}
 		}.execute();
