@@ -56,21 +56,37 @@
 
   <build>
     <plugins>
-		<plugin>
-			<groupId>org.codehaus.mojo</groupId>
-			<artifactId>exec-maven-plugin</artifactId>
-			<version>1.2</version>
-			<configuration>
-				<executable>maven-exec-commands.sh</executable>
-			</configuration>
-			<executions>
-				<execution>
-					<goals>
-						<goal>exec</goal>
-					</goals>
-				</execution>
-			</executions>
-		</plugin>
+      <plugin>
+      	<groupId>org.apache.maven.plugins</groupId>
+      	<artifactId>maven-antrun-plugin</artifactId>
+      	<version>1.6</version>
+        <executions>
+          <execution>
+            <phase>pre-integration-test</phase>
+            <configuration>
+              <target>
+  				<exec executable="adb">
+    				<arg value="remount"/>
+				</exec>
+  				<exec executable="adb">
+    				<arg value="push"/>
+    				<arg value="android-hosts"/>
+    				<arg value="/system/etc/hosts"/>
+				</exec>
+  				<exec executable="adb">
+    				<arg value="shell"/>
+    				<arg value="input"/>
+    				<arg value="keyevent"/>
+    				<arg value="82"/>
+				</exec>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>      	
+      </plugin>
       <plugin>
         <groupId>com.jayway.maven.plugins.android.generation2</groupId>
         <artifactId>maven-android-plugin</artifactId>
